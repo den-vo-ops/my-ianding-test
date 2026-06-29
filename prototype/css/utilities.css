@@ -1,0 +1,107 @@
+/* Hand-written replacement for the Tailwind Play CDN script.
+   The CDN script (https://cdn.tailwindcss.com) is an external dependency
+   that can fail to load (network restrictions, ad blockers, offline use),
+   and when it does, every utility class below silently does nothing —
+   collapsing the whole layout (the exact "icons stretched full-screen"
+   bug this file fixes). Self-hosting removes that failure mode entirely.
+   Each rule below reproduces the equivalent Tailwind v3 default utility. */
+
+.relative { position: relative; }
+.absolute { position: absolute; }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-start { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.grid { display: grid; }
+.inline-block { display: inline-block; }
+.block { display: block; }
+
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-10 { gap: 2.5rem; }
+
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+.mt-10 { margin-top: 2.5rem; }
+.mt-12 { margin-top: 3rem; }
+
+.p-5 { padding: 1.25rem; }
+.p-6 { padding: 1.5rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+.py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+.py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+
+.min-h-screen { min-height: 100vh; }
+.h-40 { height: 10rem; }
+.h-64 { height: 16rem; }
+.h-full { height: 100%; }
+.w-40 { width: 10rem; }
+.w-64 { width: 16rem; }
+.w-full { width: 100%; }
+
+.max-w-xl { max-width: 36rem; }
+.max-w-2xl { max-width: 42rem; }
+.max-w-3xl { max-width: 48rem; }
+.max-w-md { max-width: 28rem; }
+
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-base { font-size: 1rem; line-height: 1.5rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+.text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.text-6xl { font-size: 3.75rem; line-height: 1; }
+
+.font-semibold { font-weight: 600; }
+.leading-tight { line-height: 1.25; }
+.tracking-wide { letter-spacing: 0.025em; }
+.tracking-widest { letter-spacing: 0.1em; }
+.uppercase { text-transform: uppercase; }
+.text-center { text-align: center; }
+.text-white { color: #fff; }
+
+.rounded-full { border-radius: 9999px; }
+.shadow-lg { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+
+.opacity-60 { opacity: 0.6; }
+.opacity-80 { opacity: 0.8; }
+.pointer-events-none { pointer-events: none; }
+.overflow-hidden { overflow: hidden; }
+.outline-none { outline: none; }
+
+.top-1\/4 { top: 25%; }
+.right-\[-5\%\] { right: -5%; }
+
+.space-y-3 > * + * { margin-top: 0.75rem; }
+.space-y-4 > * + * { margin-top: 1rem; }
+
+.text-\[var\(--accent\)\] { color: var(--accent); }
+.text-\[var\(--text\)\] { color: var(--text); }
+.text-\[var\(--text-muted\)\] { color: var(--text-muted); }
+.bg-\[var\(--accent-solid\)\] { background-color: var(--accent-solid); }
+
+@media (min-width: 768px) {
+  .md\:items-center { align-items: center; }
+  .md\:h-96 { height: 24rem; }
+  .md\:w-96 { width: 24rem; }
+  .md\:px-12 { padding-left: 3rem; padding-right: 3rem; }
+  .md\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+  .md\:text-6xl { font-size: 3.75rem; line-height: 1; }
+  .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .md\:grid-cols-\[200px_1fr\] { grid-template-columns: 200px 1fr; }
+}
