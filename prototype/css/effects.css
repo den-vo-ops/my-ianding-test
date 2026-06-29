@@ -1,0 +1,104 @@
+/* New visual effects layer: nav/mobile menu, scroll-reveal, hover states,
+   gradient heading, parallax orbs, back-to-top, form-success, counters.
+   Kept separate from styles.css (base theme) and utilities.css (Tailwind
+   equivalents) so this file's responsibility is just "new behavior". */
+
+html {
+  scroll-behavior: smooth;
+}
+
+#hero, #cases, #services, #about, #testimonials, #faq, #contact {
+  scroll-margin-top: 80px;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+}
+
+.nav-brand {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 0.875rem;
+  color: var(--text);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--bg);
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .nav-links.is-open {
+    display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

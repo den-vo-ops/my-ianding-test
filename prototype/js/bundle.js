@@ -80,6 +80,24 @@ function setupMagneticButtons() {
   });
 }
 
+function setupNavMobileMenu() {
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+  if (!toggle || !links) return;
+
+  toggle.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  links.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      links.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
 function setupContactForm() {
   const form = document.getElementById('contact-form');
   const status = document.getElementById('contact-form-status');
@@ -110,5 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCursorObject();
   setupMagneticButtons();
   setupContactForm();
+  setupNavMobileMenu();
 });
 
