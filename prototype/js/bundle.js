@@ -139,6 +139,23 @@ function setupParallax() {
   });
 }
 
+function setupBackToTop() {
+  const button = document.getElementById('back-to-top');
+  if (!button) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > window.innerHeight) {
+      button.classList.add('is-visible');
+    } else {
+      button.classList.remove('is-visible');
+    }
+  });
+
+  button.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+}
+
 function setupContactForm() {
   const form = document.getElementById('contact-form');
   const status = document.getElementById('contact-form-status');
@@ -172,5 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupNavMobileMenu();
   setupScrollReveal();
   setupParallax();
+  setupBackToTop();
 });
 
