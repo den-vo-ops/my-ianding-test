@@ -288,9 +288,15 @@
       <button type="submit" class="magnetic-btn rounded-full bg-[var(--accent-solid)] px-8 py-3 text-base font-semibold text-white shadow-lg">
         Отправить
       </button>
-
-      <p id="contact-form-status" role="status" class="text-sm"></p>
     </form>
+
+    <div id="form-success" class="form-success" hidden role="status">
+      <svg viewBox="0 0 52 52" class="success-checkmark">
+        <circle cx="26" cy="26" r="24" fill="none" />
+        <path fill="none" d="M14 27l7 7 16-16" />
+      </svg>
+      <p class="mt-3 text-sm text-[var(--text-muted)]">Спасибо! Я скоро отвечу.</p>
+    </div>
   </section>
   </main>
 

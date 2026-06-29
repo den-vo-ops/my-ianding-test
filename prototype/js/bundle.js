@@ -158,26 +158,22 @@ function setupBackToTop() {
 
 function setupContactForm() {
   const form = document.getElementById('contact-form');
-  const status = document.getElementById('contact-form-status');
-  if (!form || !status) return;
+  const success = document.getElementById('form-success');
+  if (!form || !success) return;
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     const formData = new FormData(form);
     const formDataLike = { website: formData.get('website') };
 
-    if (isLikelyBot(formDataLike)) {
-      // Don't tip off bots — pretend success without sending anything.
-      status.textContent = 'Спасибо! Я скоро отвечу.';
-      status.style.color = 'var(--accent)';
-      form.reset();
-      return;
-    }
+    // Honeypot is checked, but both branches show the same success UI
+    // either way — a bot gets no signal that it was caught, and there is
+    // no real backend in this prototype regardless of the check's result.
+    isLikelyBot(formDataLike);
 
-    // No backend in this prototype — simulate a successful submission.
-    status.textContent = 'Спасибо! Я скоро отвечу.';
-    status.style.color = 'var(--accent)';
     form.reset();
+    form.hidden = true;
+    success.hidden = false;
   });
 }
 
