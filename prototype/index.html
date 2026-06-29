@@ -15,6 +15,46 @@
 </head>
 <body>
   <main id="page">
+  <section id="hero" class="relative min-h-screen overflow-hidden px-6 py-24 md:px-12 flex flex-col justify-center">
+    <div id="cursor-object" class="cursor-object pointer-events-none absolute right-[-5%] top-1/4 h-64 w-64 opacity-60 md:h-96 md:w-96" aria-hidden="true">
+      <svg viewBox="0 0 200 200" class="h-full w-full">
+        <g stroke="#7c5cff" stroke-width="1.2" fill="none" opacity="0.8">
+          <circle cx="100" cy="100" r="6" fill="#7c5cff" />
+          <circle cx="40" cy="60" r="4" fill="#7c5cff" />
+          <circle cx="160" cy="50" r="4" fill="#7c5cff" />
+          <circle cx="50" cy="150" r="4" fill="#7c5cff" />
+          <circle cx="150" cy="140" r="4" fill="#7c5cff" />
+          <line x1="100" y1="100" x2="40" y2="60" />
+          <line x1="100" y1="100" x2="160" y2="50" />
+          <line x1="100" y1="100" x2="50" y2="150" />
+          <line x1="100" y1="100" x2="150" y2="140" />
+          <line x1="40" y1="60" x2="160" y2="50" />
+          <line x1="50" y1="150" x2="150" y2="140" />
+        </g>
+      </svg>
+    </div>
+
+    <p class="font-mono-fallback text-sm uppercase tracking-widest text-[var(--accent)]">
+      Денис Во · AI-агенты, сайты, приложения
+    </p>
+
+    <h1 id="hero-heading" class="mt-6 max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">
+      Делаю AI-агентов, сайты и приложения, которые работают на бизнес, а не просто лежат в портфолио
+    </h1>
+
+    <p class="mt-6 max-w-xl text-lg text-[var(--text-muted)]">
+      Разработчик-одиночка. Беру задачу от идеи до запуска: автоматизация на AI, сайты, веб- и мобильные приложения. Работаю с малым и средним бизнесом.
+    </p>
+
+    <div class="mt-10 flex flex-col items-start gap-3">
+      <a id="hero-cta" href="https://t.me/PLACEHOLDER" class="magnetic-btn inline-block rounded-full bg-[var(--accent-solid)] px-8 py-4 text-base font-semibold text-white shadow-lg">
+        Обсудить задачу в Telegram
+      </a>
+      <p class="font-mono-fallback text-xs text-[var(--text-muted)]">
+        Оплата 50/50 · Без посредников · Первый шаг — бесплатный разбор задачи
+      </p>
+    </div>
+  </section>
   <!-- NEXT_SECTION -->
   </main>
   <script type="module" src="js/main.js"></script>
