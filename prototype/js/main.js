@@ -98,6 +98,25 @@ function setupScrollReveal() {
   sections.forEach((section) => observer.observe(section));
 }
 
+function setupParallax() {
+  const orbs = document.querySelectorAll('.glow-orb');
+  if (!orbs.length || reduceMotion) return;
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const offset = window.scrollY * 0.15;
+      orbs.forEach((orb, index) => {
+        const direction = index % 2 === 0 ? 1 : -1;
+        orb.style.transform = `translateY(${offset * direction}px)`;
+      });
+      ticking = false;
+    });
+  });
+}
+
 function setupContactForm() {
   const form = document.getElementById('contact-form');
   const status = document.getElementById('contact-form-status');
@@ -130,4 +149,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setupContactForm();
   setupNavMobileMenu();
   setupScrollReveal();
+  setupParallax();
 });

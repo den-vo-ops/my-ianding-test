@@ -146,3 +146,28 @@ footer {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+.glow-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-orb-1 {
+  top: 10%;
+  left: -10%;
+  width: 28rem;
+  height: 28rem;
+  background: var(--accent);
+}
+
+.glow-orb-2 {
+  bottom: 5%;
+  right: -10%;
+  width: 24rem;
+  height: 24rem;
+  background: var(--accent-solid);
+}
