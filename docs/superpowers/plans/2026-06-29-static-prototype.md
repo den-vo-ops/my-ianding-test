@@ -341,8 +341,8 @@ Create `prototype/index.html`:
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Денис Во — AI-агенты, сайты и приложения" />
   <meta property="og:description" content="Делаю AI-агентов, сайты и приложения, которые работают на бизнес, а не просто лежат в портфолио." />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-sans@latest/latin.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono@latest/latin.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@latest/index.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist-mono@latest/index.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
