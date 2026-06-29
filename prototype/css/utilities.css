@@ -94,6 +94,8 @@
 .text-\[var\(--text-muted\)\] { color: var(--text-muted); }
 .bg-\[var\(--accent-solid\)\] { background-color: var(--accent-solid); }
 
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
 @media (min-width: 768px) {
   .md\:items-center { align-items: center; }
   .md\:h-96 { height: 24rem; }

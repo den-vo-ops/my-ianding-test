@@ -134,6 +134,50 @@ function setupBackToTop() {
   });
 }
 
+function animateCounter(element) {
+  const target = Number(element.dataset.target);
+  const suffix = element.dataset.suffix || '';
+  const duration = 1200;
+  const start = performance.now();
+
+  function tick(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const value = Math.round(target * progress);
+    element.textContent = `${value}${suffix}`;
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+    }
+  }
+
+  requestAnimationFrame(tick);
+}
+
+function setupCounters() {
+  const counters = document.querySelectorAll('.counter');
+  if (!counters.length) return;
+
+  if (reduceMotion) {
+    counters.forEach((counter) => {
+      counter.textContent = `${counter.dataset.target}${counter.dataset.suffix || ''}`;
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  counters.forEach((counter) => observer.observe(counter));
+}
+
 function setupContactForm() {
   const form = document.getElementById('contact-form');
   const success = document.getElementById('form-success');
@@ -164,4 +208,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setupScrollReveal();
   setupParallax();
   setupBackToTop();
+  setupCounters();
 });
