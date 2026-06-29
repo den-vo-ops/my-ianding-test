@@ -18,6 +18,7 @@
 - Formal Lighthouse/Core Web Vitals measurement (LCP < 2.5s per spec section 5) is deferred to the future Next.js production plan, not this one: the prototype deliberately uses vanilla JS instead of GSAP and has no build step, which keeps it fast by construction, but a CDN-loaded Tailwind script and CDN fonts make raw Lighthouse numbers here unrepresentative of the production build's actual performance budget.
 - Pointer-only effects (cursor-object parallax, magnetic buttons) must be skipped when `(pointer: fine)` doesn't match, so touch devices get a static, fully functional page.
 - All CTAs (Telegram, Max, email) are plain `<a href="...">` elements that work with JavaScript disabled.
+- **Serve over HTTP for any manual check, never open via `file://`.** `js/main.js` is loaded as `<script type="module">`; browsers block ES module scripts under the `file://` origin via CORS, so opening `index.html` by double-click or `xdg-open` directly loads a page with no working JavaScript (Task 3 implementation surfaced this). Every manual visual check in this plan from here on must run a local static server first, e.g. `cd prototype && python3 -m http.server 8000`, then open `http://localhost:8000/`.
 - Out of scope for this plan (per spec sections 1 and 6): live AI chat widget, real backend for the contact form, ru/en i18n toggle, real case studies/testimonials (placeholders are intentional and marked `[ПРИМЕР]`/`TODO`), calendar booking integration.
 
 ---
@@ -514,12 +515,12 @@ Run: `grep -c 'id="hero"' prototype/index.html`
 Expected: `1`
 
 Run: `grep -c "setupMagneticButtons" prototype/js/main.js`
-Expected: `1`
+Expected: `2` (one function definition, one call site inside the `DOMContentLoaded` listener)
 
 - [ ] **Step 4: Manual visual check**
 
-Run: `xdg-open prototype/index.html`
-Expected: page opens in the default browser; the H1 fades/slides in word-by-word on load; moving the mouse rotates the node graph in the top-right and makes the Telegram button drift slightly toward the cursor on hover.
+Run: `cd prototype && python3 -m http.server 8000 &` then open `http://localhost:8000/` in a browser (opening `index.html` directly via `file://` blocks the `type="module"` script via CORS and no JavaScript will run).
+Expected: page opens; the H1 fades/slides in word-by-word on load; moving the mouse rotates the node graph in the top-right and makes the Telegram button drift slightly toward the cursor on hover.
 
 - [ ] **Step 5: Commit**
 
@@ -894,7 +895,7 @@ Expected: `7`
 
 - [ ] **Step 3: Manual visual check**
 
-Run: `xdg-open prototype/index.html`
+Run: `cd prototype && python3 -m http.server 8000 &` then open `http://localhost:8000/`.
 Expected: clicking any FAQ question expands/collapses its answer (native `<details>` behavior); works with Tab + Enter from the keyboard too.
 
 - [ ] **Step 4: Commit**
@@ -1035,7 +1036,7 @@ Expected: `2` (one definition, one call site)
 
 - [ ] **Step 4: Manual visual check**
 
-Run: `xdg-open prototype/index.html`
+Run: `cd prototype && python3 -m http.server 8000 &` then open `http://localhost:8000/`.
 Expected: filling name/contact/message and clicking "Отправить" shows "Спасибо! Я скоро отвечу." below the button; the three contact buttons (Telegram, Max, Email) are visible and clickable as plain links.
 
 - [ ] **Step 5: Commit**
@@ -1068,7 +1069,7 @@ Expected: a number ≥ 6 (Hero CTA, two testimonials links, three contact-sectio
 
 - [ ] **Step 3: Confirm `prefers-reduced-motion` disables motion**
 
-Open `prototype/index.html` in the browser (`xdg-open prototype/index.html`), open DevTools → Rendering tab → set "Emulate CSS media feature prefers-reduced-motion" to "reduce", then reload.
+With the local server still running (`cd prototype && python3 -m http.server 8000 &`), open `http://localhost:8000/` in the browser, open DevTools → Rendering tab → set "Emulate CSS media feature prefers-reduced-motion" to "reduce", then reload.
 Expected: the Hero heading is fully visible immediately (no word-by-word fade-in), the cursor-object does not rotate on mouse move, and the magnetic buttons do not shift toward the cursor.
 
 - [ ] **Step 4: Confirm pointer-fine effects are skipped on touch**
@@ -1089,8 +1090,8 @@ Expected: Hero text, case cards, service/process grid, and the contact form all 
 
 - [ ] **Step 7: Open the finished prototype for the user to review**
 
-Run: `xdg-open "/home/denis/Документы/Projects/my-ianding-test/prototype/index.html"`
-Expected: the default browser opens showing the complete page — Hero → Кейсы → Услуги и процесс → О себе → Где посмотреть, как я работаю → FAQ → Готовы обсудить задачу.
+Run: `cd "/home/denis/Документы/Projects/my-ianding-test/prototype" && python3 -m http.server 8000 &` then `xdg-open "http://localhost:8000/"`.
+Expected: the default browser opens showing the complete page — Hero → Кейсы → Услуги и процесс → О себе → Где посмотреть, как я работаю → FAQ → Готовы обсудить задачу — with all animations and the contact form working (served over HTTP, not `file://`).
 
 - [ ] **Step 8: Commit any fixes made during this pass**
 

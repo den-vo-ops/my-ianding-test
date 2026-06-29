@@ -1,5 +1,6 @@
 import { splitWords } from './kinetic-text.js';
 import { computeMagneticOffset } from './magnetic.js';
+import { isLikelyBot } from './honeypot.js';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const pointerFine = window.matchMedia('(pointer: fine)').matches;
@@ -57,8 +58,34 @@ function setupMagneticButtons() {
   });
 }
 
+function setupContactForm() {
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('contact-form-status');
+  if (!form || !status) return;
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const formDataLike = { website: formData.get('website') };
+
+    if (isLikelyBot(formDataLike)) {
+      // Don't tip off bots — pretend success without sending anything.
+      status.textContent = 'Спасибо! Я скоро отвечу.';
+      status.style.color = 'var(--accent)';
+      form.reset();
+      return;
+    }
+
+    // No backend in this prototype — simulate a successful submission.
+    status.textContent = 'Спасибо! Я скоро отвечу.';
+    status.style.color = 'var(--accent)';
+    form.reset();
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   setupKineticHeading();
   setupCursorObject();
   setupMagneticButtons();
+  setupContactForm();
 });

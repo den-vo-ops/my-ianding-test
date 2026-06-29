@@ -235,8 +235,51 @@
       </details>
     </div>
   </section>
-  <!-- NEXT_SECTION -->
+  <section id="contact" class="px-6 py-20 md:px-12">
+    <h2 class="text-3xl font-semibold md:text-4xl">Готовы обсудить задачу?</h2>
+    <p class="mt-3 max-w-xl text-[var(--text-muted)]">
+      Бесплатный разбор за 15 минут — пойму, что нужно, и скажу честно, стоит ли AI-агент/сайт своих денег в вашем случае.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a href="https://t.me/PLACEHOLDER" class="magnetic-btn rounded-full bg-[var(--accent-solid)] px-8 py-4 text-base font-semibold text-white shadow-lg">Telegram</a>
+      <a href="https://max.ru/PLACEHOLDER" class="magnetic-btn glass-card px-8 py-4 text-base font-semibold">Max</a>
+      <a href="mailto:denis@PLACEHOLDER.ru" class="magnetic-btn glass-card px-8 py-4 text-base font-semibold">Email</a>
+    </div>
+
+    <form id="contact-form" class="mt-12 max-w-md space-y-4" novalidate>
+      <div class="hp-field" aria-hidden="true">
+        <label for="website">Не заполняйте это поле</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div>
+        <label for="name" class="block text-sm text-[var(--text-muted)]">Имя</label>
+        <input type="text" id="name" name="name" required class="glass-card mt-1 w-full px-4 py-3 text-[var(--text)] outline-none" />
+      </div>
+
+      <div>
+        <label for="contact" class="block text-sm text-[var(--text-muted)]">Telegram, Max или email</label>
+        <input type="text" id="contact" name="contact" required class="glass-card mt-1 w-full px-4 py-3 text-[var(--text)] outline-none" />
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm text-[var(--text-muted)]">Что нужно сделать</label>
+        <textarea id="message" name="message" rows="3" required class="glass-card mt-1 w-full px-4 py-3 text-[var(--text)] outline-none"></textarea>
+      </div>
+
+      <button type="submit" class="magnetic-btn rounded-full bg-[var(--accent-solid)] px-8 py-3 text-base font-semibold text-white shadow-lg">
+        Отправить
+      </button>
+
+      <p id="contact-form-status" role="status" class="text-sm"></p>
+    </form>
+  </section>
   </main>
+
+  <footer class="px-6 py-10 text-center text-sm text-[var(--text-muted)] md:px-12">
+    <p>© 2026 Денис Во</p>
+  </footer>
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
