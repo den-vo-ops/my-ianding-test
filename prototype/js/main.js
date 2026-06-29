@@ -76,6 +76,28 @@ function setupNavMobileMenu() {
   });
 }
 
+function setupScrollReveal() {
+  const sections = document.querySelectorAll('.reveal');
+  if (!sections.length || reduceMotion) return;
+
+  sections.forEach((section) => section.classList.add('reveal-pending'));
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('reveal-pending');
+          entry.target.classList.add('reveal-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+}
+
 function setupContactForm() {
   const form = document.getElementById('contact-form');
   const status = document.getElementById('contact-form-status');
@@ -107,4 +129,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMagneticButtons();
   setupContactForm();
   setupNavMobileMenu();
+  setupScrollReveal();
 });
